@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Member CVI 02</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="icon" type="image/png" href="images/ybci2.png">
+
+<style>
+body{
+    background:#f4f6f9;
+    color:#212529;
+    font-family:Arial,sans-serif;
+}
+
+/* LOGIN */
+#login-box{
+    max-width:350px;
+    margin:100px auto;
+    background:#ffffff;
+    padding:25px;
+    border-radius:12px;
+    box-shadow:0 8px 25px rgba(0,0,0,.15);
+}
+.btn-login{
+    width:100%;
+    background:#0d6efd;
+    color:#fff;
+    border:none;
+    padding:10px;
+    border-radius:8px;
+    font-weight:bold;
+}
+.btn-login:hover{background:#0b5ed7}
+
+#main-content{display:none}
+
+/* LOGOUT */
+#logoutBtn{
+    position:fixed;
+    top:15px;
+    right:15px;
+    background:#dc3545;
+    border:none;
+    padding:10px 18px;
+    color:#fff;
+    font-weight:bold;
+    border-radius:8px;
+    display:none;
+    z-index:9999;
+}
+#logoutBtn:hover{background:#bb2d3b}
+
+/* DASHBOARD */
+.container{max-width:1100px;margin:20px auto;padding:20px}
+h2{
+    color:#0d6efd;
+    font-weight:bold;
+    text-align:center;
+    margin-bottom:30px;
+}
+
+.dashboard-card{
+    border-radius:15px;
+    color:#fff;
+    padding:25px;
+    text-align:center;
+    font-weight:bold;
+    min-height:120px;
+    box-shadow:0 5px 15px rgba(0,0,0,.15);
+}
+.bg-member{background:linear-gradient(135deg,#4facfe,#00f2fe)}
+.bg-short{background:linear-gradient(135deg,#43e97b,#38f9d7)}
+
+#search{
+    background:#ffffff;
+    border:2px solid #ced4da;
+    color:#212529;
+}
+#search:focus{
+    border-color:#0d6efd;
+    box-shadow:0 0 8px rgba(13,110,253,.5);
+}
+
+/* TABLE */
+.table{
+    background:#ffffff;
+    color:#212529;
+}
+.table thead th{
+    background:#0d6efd;
+    color:#ffffff;
+    text-align:center;
+}
+.table tbody tr:hover{
+    background:#e9f2ff;
+}
+
+/* BUTTON */
+.btn-custom{
+    background:#0d6efd;
+    border:none;
+    color:#ffffff;
+    font-weight:bold;
+    padding:8px 18px;
+}
+.btn-custom:hover{background:#0b5ed7}
+</style>
+</head>
+
+<body>
+
+<button id="logoutBtn" onclick="logout()">Logout</button>
+
+<!-- LOGIN -->
+<div id="login-box">
+    <h3 class="text-center text-primary fw-bold">LOGIN</h3>
+    <p class="text-center">Masukkan Password</p>
+    <input type="password" id="password" class="form-control mb-3" placeholder="Password">
+    <button class="btn-login" onclick="checkLogin()">Masuk</button>
+</div>
+
+<!-- DASHBOARD -->
+<div id="main-content">
+<div class="container">
+
+<h2>Dashboard Member CVI</h2>
+
+<div class="row mb-4">
+    <div class="col-md-6 mb-3">
+        <div class="dashboard-card bg-member">
+            <h5>Total Member</h5>
+            <h3 id="totalMember">0</h3>
+        </div>
+    </div>
+    <div class="col-md-6 mb-3">
+        <div class="dashboard-card bg-short">
+            <h5>Total Short NRA</h5>
+            <h3 id="totalShort">0</h3>
+        </div>
+    </div>
+</div>
+
+<input type="text" id="search" class="form-control mb-3"
+placeholder="Cari Nama, Alamat, NRA, No HP..." onkeyup="applySearch()">
+
+<div class="table-responsive">
+<table class="table table-bordered">
+<thead>
+<tr>
+    <th>Nama</th>
+    <th>Alamat</th>
+    <th>NRA Nasional</th>
+    <th>NRA 02</th>
+    <th>No HP</th>
+</tr>
+</thead>
+<tbody id="table-body"></tbody>
+</table>
+</div>
+
+<div class="d-flex justify-content-between mt-3">
+    <button class="btn btn-custom" onclick="prevPage()">◀ Sebelumnya</button>
+    <button class="btn btn-custom" onclick="nextPage()">Berikutnya ▶</button>
+</div>
+
+</div>
+</div>
+
+<script>
+function checkLogin(){
+    if(document.getElementById("password").value === "CVI"){
+        document.getElementById("login-box").style.display="none";
+        document.getElementById("main-content").style.display="block";
+        document.getElementById("logoutBtn").style.display="block";
+    }else{
+        alert("Password salah!");
+    }
+}
+function logout(){
+    document.getElementById("main-content").style.display="none";
+    document.getElementById("login-box").style.display="block";
+    document.getElementById("logoutBtn").style.display="none";
+    document.getElementById("password").value="";
+}
+
+const URL="https://opensheet.elk.sh/1IfimbLT8V00DAEearwK6UYT5IVzrrk17qz5WLlYeuug/Sheet1";
+let originalData=[],filteredData=[],currentPage=1;
+const rowsPerPage=10;
+let searchKeyword="";
+
+fetch(URL).then(r=>r.json()).then(d=>{
+    originalData=d;
+    filteredData=d;
+    updateDashboard();
+    renderTable();
+});
+
+function renderTable(){
+    const body=document.getElementById("table-body");
+    body.innerHTML="";
+    let start=(currentPage-1)*rowsPerPage;
+    filteredData.slice(start,start+rowsPerPage).forEach(r=>{
+        body.innerHTML+=`
+        <tr>
+            <td>${r["Nama"]||""}</td>
+            <td>${r["Alamat"]||""}</td>
+            <td>${r["NRA Nasional"]||""}</td>
+            <td>${r["NRA 02"]||""}</td>
+            <td>${r["No Hp"]||""}</td>
+        </tr>`;
+    });
+}
+
+function nextPage(){if(currentPage*rowsPerPage<filteredData.length){currentPage++;renderTable();}}
+function prevPage(){if(currentPage>1){currentPage--;renderTable();}}
+
+function applySearch(){
+    searchKeyword=document.getElementById("search").value.toLowerCase();
+    currentPage=1;
+    updateDashboard();
+}
+
+function updateDashboard(){
+    let data=originalData.filter(r=>
+        (r["Nama"]||"").toLowerCase().includes(searchKeyword)||
+        (r["Alamat"]||"").toLowerCase().includes(searchKeyword)||
+        (r["NRA Nasional"]||"").toLowerCase().includes(searchKeyword)||
+        (r["NRA 02"]||"").toLowerCase().includes(searchKeyword)||
+        (r["No Hp"]||"").toLowerCase().includes(searchKeyword)
+    );
+    animateCount("totalMember",data.length);
+    animateCount("totalShort",data.filter(r=>!r["NRA Nasional"]).length);
+    filteredData=data;
+    renderTable();
+}
+
+function animateCount(id,end){
+    const el=document.getElementById(id);
+    let start=parseInt(el.innerText)||0;
+    let t0=performance.now(),d=500;
+    function run(t){
+        let p=Math.min((t-t0)/d,1);
+        el.innerText=Math.floor(start+(end-start)*p);
+        if(p<1)requestAnimationFrame(run);
+    }
+    requestAnimationFrame(run);
+}
+</script>
+
+</body>
+</html>

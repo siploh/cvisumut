@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Menyusuri Jalan, Menyatu dengan Alam: Tips Campervan untuk Para Pemula</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+<link rel="icon" href="img/favicon.png">
+
+<style>
+body{
+    font-family:'Roboto',sans-serif;
+    background:#f0f2f5;
+    margin:0;
+}
+
+/* ================= IKLAN SAMPING ================= */
+.ads-left,.ads-right,.ads-left-bottom,.ads-right-bottom{
+    position:fixed;
+    width:12%;
+    max-width:220px;
+    background:#fff;
+    border-radius:10px;
+    box-shadow:0 4px 10px rgba(0,0,0,.15);
+    overflow:hidden;
+    z-index:999;
+    opacity:0;
+    transform:scale(.9);
+    transition:opacity 1s ease, transform 1s cubic-bezier(.34,1.56,.64,1);
+}
+
+.ads-left{
+    top:100px;
+    left:10px;
+    height:65vh;
+    max-height:700px;
+    transform:translateX(-50px) scale(.9);
+}
+
+.ads-right{
+    top:100px;
+    right:10px;
+    height:65vh;
+    max-height:700px;
+    transform:translateX(50px) scale(.9);
+}
+
+.ads-left-bottom{
+    top:calc(100px + 65vh + 20px);
+    left:10px;
+    height:25vh;
+    max-height:200px;
+    transform:translateX(-50px) scale(.9);
+}
+
+.ads-right-bottom{
+    top:calc(100px + 65vh + 20px);
+    right:10px;
+    height:25vh;
+    max-height:200px;
+    transform:translateX(50px) scale(.9);
+}
+
+.ads-left.show,
+.ads-right.show,
+.ads-left-bottom.show,
+.ads-right-bottom.show{
+    opacity:1;
+    transform:translateX(0) scale(1);
+}
+
+.ads-content{
+    display:flex;
+    flex-direction:column;
+    height:100%;
+}
+
+.ads-content img{
+    width:100%;
+    flex:1;
+    object-fit:cover;
+}
+
+.ads-button{
+    margin:10px;
+    padding:10px 5px;
+    background:#007bff;
+    color:#fff;
+    text-align:center;
+    text-decoration:none;
+    font-weight:700;
+    border-radius:8px;
+    transition:.3s;
+}
+
+.ads-button:hover{
+    background:#0056b3;
+    transform:scale(1.05);
+}
+
+.ads-right .ads-button{
+    background:#d32f2f;
+}
+.ads-right .ads-button:hover{
+    background:#b71c1c;
+}
+
+/* HILANG DI MOBILE */
+@media(max-width:1024px){
+    .ads-left,.ads-right,.ads-left-bottom,.ads-right-bottom{display:none;}
+}
+
+/* ================= NAVBAR ================= */
+nav{
+    background:#007bff;
+    padding:15px 20px;
+}
+nav a{
+    color:#fff;
+    text-decoration:none;
+    font-weight:700;
+}
+
+/* ================= ARTIKEL ================= */
+.container{
+    padding:70px 20px;
+}
+.artikel-card{
+    background:#fff;
+    max-width:800px;
+    margin:60px auto;
+    border-radius:15px;
+    box-shadow:0 8px 20px rgba(0,0,0,.15);
+    position:relative;
+}
+.main-image{width:100%;}
+.artikel-content{padding:25px;}
+.artikel-content h1{
+    font-size:2em;
+    margin-bottom:20px;
+}
+.artikel-content p{
+    font-size:1.1em;
+    line-height:1.8;
+    white-space:pre-line;
+    text-align:justify;
+}
+
+/* ================= POPUP MOBILE ================= */
+.mobile-popup{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.6);
+    justify-content:center;
+    align-items:center;
+    z-index:9999;
+    opacity:0;
+    transition:.4s;
+}
+.mobile-popup.show{opacity:1;}
+.popup-box{
+    width:85%;
+    max-width:350px;
+    background:#fff;
+    border-radius:12px;
+    overflow:hidden;
+    position:relative;
+}
+.popup-box img{width:100%;}
+.close-popup{
+    position:absolute;
+    top:8px;
+    right:10px;
+    font-size:24px;
+    cursor:pointer;
+    color:red;
+}
+@media(max-width:1024px){
+    .mobile-popup{display:flex;}
+}
+
+/* ================= FOOTER ================= */
+footer{
+    text-align:center;
+    padding:20px 0;
+    background:#f0f2f5;
+    color:#555;
+    font-size:0.9em;
+    margin-top:40px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- IKLAN KIRI -->
+<div class="ads-left" id="adsLeft">
+    <div class="ads-content">
+        <img src="img/iklan/kiri.jpeg">
+        <a href="https://bawahtangga.web.id" target="_blank" class="ads-button">🔗 Want It</a>
+    </div>
+</div>
+
+<!-- IKLAN KANAN -->
+<div class="ads-right" id="adsRight">
+    <div class="ads-content">
+        <img src="img/iklan/kanan.jpeg">
+        <a href="https://www.bawahtangga.web.id/" target="_blank" class="ads-button">🔗 Auto 2000 Gatsu</a>
+    </div>
+</div>
+
+<!-- IKLAN KIRI BAWAH -->
+<div class="ads-left-bottom" id="adsLeftBottom">
+    <div class="ads-content">
+        <img src="img/iklan/popup.jpeg">
+        <a href="https://bawahtangga.web.id" target="_blank" class="ads-button">🔗 More Info</a>
+    </div>
+</div>
+
+<!-- IKLAN KANAN BAWAH -->
+<div class="ads-right-bottom" id="adsRightBottom">
+    <div class="ads-content">
+        <img src="img/iklan/popup.jpeg">
+        <a href="https://bawahtangga.web.id target="_blank" class="ads-button">🔗 Check Now</a>
+    </div>
+</div>
+
+<nav>
+    <a href="https://cvisumut.web.id">⬅ Back</a>
+</nav>
+
+<div class="container">
+<div class="artikel-card">
+<img src="img/berita3.jpeg" class="main-image">
+<div class="artikel-content">
+<h1>Menyusuri Jalan, Menyatu dengan Alam: Tips Campervan untuk Para Pemula</h1>
+<p>
+Di sebuah pagi yang dingin, ketika embun masih setia menempel di kaca depan, suara mesin campervan perlahan menyapa alam. Bagi para pemula, perjalanan dengan campervan bukan sekadar liburan—ia adalah pelajaran tentang kesederhanaan, kebebasan, dan kearifan hidup di jalan raya.
+
+Budaya campervan sejatinya selaras dengan nilai adat Nusantara: hidup selaras dengan alam, menjaga etika, dan menghormati tempat yang disinggahi. Maka sebelum memutar kunci dan melaju jauh, ada beberapa tips penting yang patut dipahami oleh para pemula.
+
+<strong>1. Kenali Kendaraan Seperti Mengenal Rumah Sendiri</strong> 
+Campervan bukan hanya kendaraan, melainkan rumah berjalan. Pemula wajib memahami fungsi dasar: sistem listrik, air bersih, kompor, hingga tempat penyimpanan. Dalam adat lama, rumah dijaga sebelum ditinggali—begitu pula campervan. Pastikan semuanya berfungsi dengan baik sebelum berangkat.
+
+<strong>2. Mulailah Perjalanan Pendek, Jangan Terburu Jauh</strong>
+Pepatah lama berkata, “Jalan jauh dimulai dari langkah kecil.” Untuk pemula, pilih rute dekat dan aman. Ini memberi waktu beradaptasi dengan ritme hidup di dalam van, memahami kebutuhan diri, serta belajar mengatur logistik tanpa tekanan jarak.
+
+<strong>3. Hormati Alam dan Adat Setempat</strong>
+Setiap tempat memiliki aturan tak tertulis. Jangan sembarang parkir, jangan meninggalkan sampah, dan jangan merusak alam. Dalam tradisi adat, tamu yang baik adalah tamu yang tahu diri. Prinsip ini wajib dibawa oleh setiap campervaner.
+
+<strong>4. Bawa Perlengkapan Secukupnya</strong>
+SKesalahan umum pemula adalah membawa terlalu banyak barang. Padahal hidup campervan mengajarkan minimalisme. Pilih barang yang benar-benar dibutuhkan: peralatan masak sederhana, pakaian secukupnya, obat-obatan, dan perlengkapan darurat.
+
+<strong>5. Jaga Etika di Jalan dan di Perkemahan</strong>
+Senyum, sapa, dan saling membantu adalah nilai yang hidup di komunitas campervan. Jangan menyalakan musik keras di malam hari, hormati privasi sesama, dan patuhi aturan lokasi. Di situlah rasa persaudaraan tumbuh, seperti halnya hidup dalam kampung adat.
+
+<strong>6. Catat Perjalanan, Jadikan Cerita</strong>
+Dalam budaya lisan, cerita adalah warisan. Catat setiap perjalanan, ambil pelajaran dari setiap kesalahan, dan simpan kisah indah di setiap persinggahan. Bagi pemula, setiap perjalanan adalah guru terbaik.
+
+<strong>Penutup</strong>
+Campervan bukan tentang seberapa jauh kita pergi, melainkan seberapa dalam kita memahami perjalanan itu sendiri. Bagi para pemula, jadikan campervan sebagai ruang belajar—tentang alam, budaya, dan diri sendiri. Karena di balik roda yang berputar, ada kisah hidup yang terus berjalan.
+</p>
+</div>
+</div>
+</div>
+
+<!-- POPUP MOBILE -->
+<div class="mobile-popup" id="popupIklan">
+    <div class="popup-box">
+        <span class="close-popup" onclick="document.getElementById('popupIklan').style.display='none'">&times;</span>
+        <img src="img/iklan/popup.jpeg">
+    </div>
+</div>
+
+<script>
+window.addEventListener("load",()=>{
+    setTimeout(()=>adsLeft.classList.add("show"),300);
+    setTimeout(()=>adsRight.classList.add("show"),1200);
+    setTimeout(()=>adsLeftBottom.classList.add("show"),1800);
+    setTimeout(()=>adsRightBottom.classList.add("show"),2100);
+
+    if(window.innerWidth<=1024){
+        popupIklan.style.display="flex";
+        setTimeout(()=>popupIklan.classList.add("show"),50);
+    }
+});
+</script>
+
+<footer>
+© 2025 CVI 02 Sumatera Utara • All Rights Reserved
+</footer>
+
+</body>
+</html>

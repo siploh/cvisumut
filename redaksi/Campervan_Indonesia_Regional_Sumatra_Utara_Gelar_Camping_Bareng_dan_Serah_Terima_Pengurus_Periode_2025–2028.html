@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Campervan Indonesia Regional Sumatra Utara Gelar Camping Bareng dan Serah Terima Pengurus 2025–2028</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+<link rel="icon" href="img/favicon.png">
+
+<style>
+body{
+    font-family:'Roboto',sans-serif;
+    background:#f0f2f5;
+    margin:0;
+}
+
+/* ================= IKLAN SAMPING ================= */
+.ads-left,.ads-right,.ads-left-bottom,.ads-right-bottom{
+    position:fixed;
+    width:12%;
+    max-width:220px;
+    background:#fff;
+    border-radius:10px;
+    box-shadow:0 4px 10px rgba(0,0,0,.15);
+    overflow:hidden;
+    z-index:999;
+    opacity:0;
+    transform:scale(.9);
+    transition:opacity 1s ease, transform 1s cubic-bezier(.34,1.56,.64,1);
+}
+
+.ads-left{
+    top:100px;
+    left:10px;
+    height:65vh;
+    transform:translateX(-50px) scale(.9);
+}
+.ads-right{
+    top:100px;
+    right:10px;
+    height:65vh;
+    transform:translateX(50px) scale(.9);
+}
+.ads-left-bottom{
+    top:calc(100px + 65vh + 20px);
+    left:10px;
+    height:25vh;
+    transform:translateX(-50px) scale(.9);
+}
+.ads-right-bottom{
+    top:calc(100px + 65vh + 20px);
+    right:10px;
+    height:25vh;
+    transform:translateX(50px) scale(.9);
+}
+
+.ads-left.show,
+.ads-right.show,
+.ads-left-bottom.show,
+.ads-right-bottom.show{
+    opacity:1;
+    transform:translateX(0) scale(1);
+}
+
+.ads-content{
+    display:flex;
+    flex-direction:column;
+    height:100%;
+}
+.ads-content img{
+    width:100%;
+    flex:1;
+    object-fit:cover;
+}
+.ads-button{
+    margin:10px;
+    padding:10px 5px;
+    background:#007bff;
+    color:#fff;
+    text-align:center;
+    text-decoration:none;
+    font-weight:700;
+    border-radius:8px;
+}
+.ads-right .ads-button{background:#d32f2f;}
+
+@media(max-width:1024px){
+    .ads-left,.ads-right,.ads-left-bottom,.ads-right-bottom{display:none;}
+}
+
+/* ================= NAVBAR ================= */
+nav{
+    background:#007bff;
+    padding:15px 20px;
+}
+nav a{
+    color:#fff;
+    text-decoration:none;
+    font-weight:700;
+}
+
+/* ================= ARTIKEL ================= */
+.container{padding:70px 20px;}
+.artikel-card{
+    background:#fff;
+    max-width:800px;
+    margin:60px auto;
+    border-radius:15px;
+    box-shadow:0 8px 20px rgba(0,0,0,.15);
+}
+.main-image{width:100%;}
+.artikel-content{padding:25px;}
+.artikel-content h1{
+    font-size:2em;
+    margin-bottom:20px;
+}
+.artikel-content p{
+    font-size:1.1em;
+    line-height:1.8;
+    text-align:justify;
+    text-justify:inter-word;
+}
+
+/* ================= POPUP MOBILE ================= */
+.mobile-popup{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.6);
+    justify-content:center;
+    align-items:center;
+    z-index:9999;
+    opacity:0;
+    transition:.4s;
+}
+.mobile-popup.show{opacity:1;}
+.popup-box{
+    width:85%;
+    max-width:350px;
+    background:#fff;
+    border-radius:12px;
+    overflow:hidden;
+    position:relative;
+}
+.popup-box img{width:100%;}
+.close-popup{
+    position:absolute;
+    top:8px;
+    right:10px;
+    font-size:24px;
+    cursor:pointer;
+    color:red;
+}
+@media(max-width:1024px){
+    .mobile-popup{display:flex;}
+}
+
+/* ================= FOOTER ================= */
+footer{
+    text-align:center;
+    padding:20px 0;
+    background:#f0f2f5;
+    color:#555;
+    font-size:0.9em;
+    margin-top:40px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- IKLAN KIRI -->
+<div class="ads-left" id="adsLeft">
+    <div class="ads-content">
+        <img src="img/iklan/kiri.jpeg">
+        <a href="https://bawahtangga.web.id" target="_blank" class="ads-button">🔗 Want It</a>
+    </div>
+</div>
+
+<!-- IKLAN KANAN -->
+<div class="ads-right" id="adsRight">
+    <div class="ads-content">
+        <img src="img/iklan/kanan.jpeg">
+        <a href="https://www.bawahtangga.web.id/" target="_blank" class="ads-button">🔗 Auto 2000 Gatsu</a>
+    </div>
+</div>
+
+<!-- IKLAN KIRI BAWAH -->
+<div class="ads-left-bottom" id="adsLeftBottom">
+    <div class="ads-content">
+        <img src="img/iklan/popup.jpeg">
+        <a href="https://bawahtangga.web.id" target="_blank" class="ads-button">🔗 More Info</a>
+    </div>
+</div>
+
+<!-- IKLAN KANAN BAWAH -->
+<div class="ads-right-bottom" id="adsRightBottom">
+    <div class="ads-content">
+        <img src="img/iklan/popup.jpeg">
+        <a href="https://bawahtangga.web.id target="_blank" class="ads-button">🔗 Check Now</a>
+    </div>
+</div>
+
+<nav>
+    <a href="https://cvisumut.web.id">⬅ Back</a>
+</nav>
+
+<div class="container">
+<div class="artikel-card">
+<img src="img/berita1.jpeg" class="main-image">
+
+<div class="artikel-content">
+<h1>Campervan Indonesia Regional Sumatra Utara Gelar Camping Bareng dan Serah Terima Pengurus Periode 2025–2028</h1>
+
+<p><strong>Simarjunjung, Simalungun</strong> — Komunitas Campervan Indonesia Regional Sumatra Utara menggelar kegiatan camping bareng sekaligus serah terima kepengurusan periode 2025–2028 pada 17–18 Januari 2025 di kawasan wisata alam Sopo Dolok Simarjunjung, Kabupaten Simalungun, Sumatra Utara.</p>
+
+<p>Kegiatan ini diikuti oleh anggota Campervan Indonesia dari berbagai daerah di Sumatra Utara dan berlangsung dalam suasana penuh kebersamaan. Selain sebagai ajang silaturahmi antaranggota, acara ini juga bertujuan mempererat solidaritas komunitas serta mendukung promosi pariwisata alam di wilayah Sumatra Utara.</p>
+
+<p>Rangkaian kegiatan diisi dengan camping bersama, diskusi komunitas, serta menikmati keindahan panorama alam Danau Toba dari kawasan Sopo Dolok Simarjunjung. Puncak acara ditandai dengan prosesi serah terima jabatan ketua dari Pakde Anto selaku ketua periode sebelumnya kepada Opa Awal sebagai ketua baru Campervan Indonesia Regional Sumatra Utara untuk masa bakti 2025–2028.</p>
+
+<p>Dalam sambutannya, Pakde Anto menyampaikan terima kasih kepada seluruh anggota atas dukungan, kebersamaan, dan partisipasi aktif selama masa kepengurusannya. Ia berharap kepengurusan baru dapat membawa komunitas semakin solid dan terus berkembang ke arah yang lebih baik.</p>
+
+<p>Sementara itu, Opa Awal selaku ketua terpilih menyampaikan komitmennya untuk melanjutkan program-program positif yang telah berjalan serta menghadirkan inovasi kegiatan yang lebih kreatif, edukatif, dan bermanfaat, baik bagi anggota maupun masyarakat sekitar.</p>
+
+<p>Melalui kegiatan ini, Campervan Indonesia Regional Sumatra Utara diharapkan semakin eksis sebagai komunitas yang tidak hanya menyalurkan hobi berwisata dengan campervan, tetapi juga berperan aktif dalam memajukan pariwisata daerah serta menjaga kelestarian alam.</p>
+</div>
+</div>
+</div>
+
+<!-- POPUP MOBILE -->
+<div class="mobile-popup" id="popupIklan">
+    <div class="popup-box">
+        <span class="close-popup" onclick="closePopup()">&times;</span>
+        <img src="img/iklan/popup.jpeg">
+    </div>
+</div>
+
+<script>
+function closePopup(){
+    document.getElementById("popupIklan").style.display="none";
+}
+
+window.addEventListener("load",()=>{
+    setTimeout(()=>adsLeft.classList.add("show"),300);
+    setTimeout(()=>adsRight.classList.add("show"),900);
+    setTimeout(()=>adsLeftBottom.classList.add("show"),1500);
+    setTimeout(()=>adsRightBottom.classList.add("show"),1800);
+
+    if(window.innerWidth<=1024){
+        popupIklan.style.display="flex";
+        setTimeout(()=>popupIklan.classList.add("show"),50);
+    }
+});
+</script>
+
+<footer>
+© 2025 CVI 02 Sumatera Utara • All Rights Reserved
+</footer>
+
+</body>
+</html>
